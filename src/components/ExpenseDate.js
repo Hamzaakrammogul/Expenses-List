@@ -1,3 +1,4 @@
+import Card from './Card';
 import './ExpenseDate.css';
 
 function ExpensseDate(props) {
@@ -7,11 +8,13 @@ function ExpensseDate(props) {
     const year = props.date.getFullYear();
 
     return (
+        <Card className= 'expense-item'>
         <div className='expense-date'>
             <div className='expense-date__month'>{month}</div>
             <div className='expense-date__year'>{year}</div>
             <div className='expense-date__day'>{day}</div>
         </div>
+        </Card>
     )
 }
 export default ExpensseDate;
