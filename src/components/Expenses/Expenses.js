@@ -11,39 +11,28 @@ function Expenses(props) {
         console.log("In Expenses file" + filtervalue)
         setValue(filtervalue);
     }
+
+    const filteredExpenses = props.expenses.filter(expense => {
+        return expense.date.getFullYear().toString() === newValue;
+    });
+    
+    let expensesContent = <p>No expense found!</p>;
+
+    if (filteredExpenses.length > 0) {
+        expensesContent = filteredExpenses.map(
+            (expenses) => (
+                <ExpenseItem
+                    key={expenses.id}
+                    title={expenses.title}
+                    amount={expenses.amount}
+                    date={expenses.date} />
+            ));
+    }
     return (
         <div>
             <Card className='expenses'>
                 <ExpenseFilter selectedYear={newValue} expenseFun={expenseFilter} />
-                {
-                    props.expenses.map(
-                        expenses =>
-                            <ExpenseItem
-                                title={expenses.title}
-                                amount={expenses.amount}
-                                date={expenses.date} />
-                    )
-                }
-                {/* <ExpenseItem
-                    title={props.expenses[0].title}
-                    amount={props.expenses[0].amount}
-                    date={props.expenses[0].date}>
-                </ExpenseItem>
-                <ExpenseItem
-                    title={props.expenses[1].title}
-                    amount={props.expenses[1].amount}
-                    date={props.expenses[1].date}>
-                </ExpenseItem>
-                <ExpenseItem
-                    title={props.expenses[2].title}
-                    amount={props.expenses[2].amount}
-                    date={props.expenses[2].date}>
-                </ExpenseItem>
-                <ExpenseItem
-                    title={props.expenses[3].title}
-                    amount={props.expenses[3].amount}
-                    date={props.expenses[3].date}>
-                </ExpenseItem> */}
+                {expensesContent}
             </Card>
         </div>
     );
